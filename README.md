@@ -10,3 +10,9 @@ Desenvolvimento de uma plataforma de ingestão de dados no PFIN
 - Lombok
 - Junit 5
 - Spring Batch Test
+
+## Equipe de Desenvolvimento
+
+- Thiago Santos Cunha
+- Adriano Ferlin
+- Arthur Togni
