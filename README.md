@@ -13,6 +13,6 @@ Desenvolvimento de uma plataforma de ingestão de dados no PFIN
 
 ## Equipe de Desenvolvimento
 
-- Thiago
-- Adriano
-- Arthur
+- Thiago Santos Cunha
+- Adriano Ferlin
+- Arthur Togni
