@@ -20,11 +20,13 @@ public class IngestionJob {
     public Job execute(
         @Qualifier("executeStep1") Step step1,
         @Qualifier("executeStep2") Step step2) {
-        return factory
-            .get("execute")
-            .start(step1)
-            .next(step2)
-            .incrementer(new RunIdIncrementer())
-            .build();
+
+            Job build = factory
+                .get("execute")
+                .start(step1)
+                .next(step2)
+                .incrementer(new RunIdIncrementer())
+                .build();
+            return build;
     }
 }

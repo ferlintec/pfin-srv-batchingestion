@@ -8,10 +8,10 @@
 		<version>2.3.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.bradesco</groupId>
-	<artifactId>pfiningestion</artifactId>
+	<groupId>br.com.bradesco.pfin</groupId>
+	<artifactId>batchingestion</artifactId>
 	<version>0.0.1</version>
-	<name>PFIN Ingestion</name>
+	<name>pfin-srv-batchingestion</name>
 	<description>Job to perform a data ingestion</description>
 
 	<properties>
