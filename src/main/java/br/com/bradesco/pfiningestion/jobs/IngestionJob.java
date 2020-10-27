@@ -23,7 +23,7 @@ public class IngestionJob {
     @Getter
     private ApplicationStatusService appStatusService = ApplicationStatusService.getInstance();
 
-    @Bean
+    @Bean("ExecuteIngestionJob")
     public Job execute(
         @Qualifier("executeStep1") Step step1,
         @Qualifier("executeStep2") Step step2) {
