@@ -25,13 +25,11 @@ public class IngestionJob {
 
     @Bean("ExecuteIngestionJob")
     public Job execute(
-        @Qualifier("executeStep1") Step step1,
-        @Qualifier("executeStep2") Step step2) {
+        @Qualifier("executeStep1") Step step1) {
             appStatusService.setStatus(ApplicationStatus.INITED);
             Job build = factory
                 .get("execute")
                 .start(step1)
-                .next(step2)
                 .incrementer(new RunIdIncrementer())
                 .build();
             appStatusService.setStatus(ApplicationStatus.FINISHED);

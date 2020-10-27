@@ -18,6 +18,7 @@ public class DataSourceConfigImpl implements DataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
+    
     @Bean
     @ConfigurationProperties(prefix = "pfin.datasource")
     public DataSource pfinDataSource() {
