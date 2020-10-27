@@ -1,14 +1,15 @@
 package br.com.bradesco.pfiningestion.steps;
 
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.scope.context.ChunkContext;
-import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import br.com.bradesco.pfiningestion.domain.entities.Pessoa;
 
 @Configuration
 public class Step1 {
@@ -17,16 +18,15 @@ public class Step1 {
     private StepBuilderFactory factory;
 
     @Bean("executeStep1")
-    public Step execute() {
+    public Step execute(
+        @Qualifier("executePessoaReader") ItemReader<Pessoa> executePessoaReader,
+        @Qualifier("executePessoaWriter") ItemWriter<Pessoa> executePessoaWriter
+        ) {
         return factory
             .get("executeStep1")
-            .tasklet(new Tasklet() {
-				@Override
-				public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-					System.out.println("executeStep1");
-					return RepeatStatus.FINISHED;
-				}
-            })
+            .<Pessoa, Pessoa>chunk(1)
+            .reader(executePessoaReader)
+            .writer(executePessoaWriter)
             .build();
     }
 
