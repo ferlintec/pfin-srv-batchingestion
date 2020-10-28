@@ -1,4 +1,4 @@
-package br.com.bradesco.pfiningestion.steps;
+package br.com.bradesco.pfiningestion.FormatarDependente.steps;
 
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -9,26 +9,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.bradesco.pfiningestion.domain.entities.Pessoa;
+import br.com.bradesco.pfiningestion.FormatarDependente.entities.FormatarDependente;
 
 @Configuration
-public class Step1 {
-
+public class FormatarDependenteStepConfig {
     @Autowired
     private StepBuilderFactory factory;
 
-    @Bean("executeStep1")
+    @Bean("formatarDependenteStep")
     public Step execute(
-        @Qualifier("executePessoaReader") ItemReader<Pessoa> executePessoaReader,
-        @Qualifier("executePessoaWriter") ItemWriter<Pessoa> executePessoaWriter
-        ) {
+        @Qualifier("executeFormataDependenteReader") ItemReader<FormatarDependente> reader,
+        @Qualifier("executeFormataDependenteWriter") ItemWriter<FormatarDependente> writer
+    ) {
         return factory
-            .get("executeStep1")
-            .<Pessoa, Pessoa>chunk(1)
-            .reader(executePessoaReader)
-            .writer(executePessoaWriter)
+            .get("formatarDependenteStep")
+            .<FormatarDependente, FormatarDependente>chunk(1)
+            .reader(reader)
+            .writer(writer)
             .build();
     }
-
-
 }
