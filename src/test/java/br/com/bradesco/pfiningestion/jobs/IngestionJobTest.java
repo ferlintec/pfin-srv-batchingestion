@@ -1,63 +1,64 @@
 package br.com.bradesco.pfiningestion.jobs;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.batch.core.ExitStatus;
+import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobInstance;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.test.JobLauncherTestUtils;
-import org.springframework.batch.test.JobRepositoryTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration("application.properties")
+import br.com.bradesco.pfiningestion.BatchTestConfig;
+import br.com.bradesco.pfiningestion.FormatarDependente.steps.FormatarDependenteStepConfig;
+import br.com.bradesco.pfiningestion.FormatarDependente.writers.FormatarDependenteWriterConfig;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {
+    IngestionJobConfig.class,
+    BatchTestConfig.class,
+    ExtractJobLauncherTestUtils.class,
+    FormatarDependenteStepConfig.class,
+    FormatarDependenteWriterConfig.class
+})
+@JdbcTest
+@EnableBatchProcessing
 @SpringBatchTest
-@EnableAutoConfiguration
-@TestExecutionListeners({ 
-    DependencyInjectionTestExecutionListener.class, 
-    DirtiesContextTestExecutionListener.class}
-)
-@DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 public class IngestionJobTest {
 
     @Autowired
+    @Qualifier(value = "extractJobLauncherTestUtils")
     private JobLauncherTestUtils jobLauncherTestUtils;
 
-    @Autowired
-    private JobRepositoryTestUtils jobRepositoryTestUtils;
-
-    @BeforeEach
-    void init() {
-    }
-
-    @After
-    public void finalize() {
-        jobRepositoryTestUtils.removeJobExecutions();
+    @Before
+    public void init() {
     }
 
     @Test
     public void deveExecutarUmJobComSucesso() throws Exception {
+        // when
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
 
-        JobInstance actualJobInstance = jobExecution.getJobInstance();
-        ExitStatus actualJobExitStatus = jobExecution.getExitStatus();
+        // then
+        Assert.assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
+    }
+}
 
-        assertEquals(actualJobInstance.getJobName(), is("ExecuteIngestionJob"));
-        assertEquals(actualJobExitStatus, is("COMPLETED"));
+@Component(value = "extractJobLauncherTestUtils")
+class ExtractJobLauncherTestUtils extends JobLauncherTestUtils {
+
+    @Autowired
+    @Qualifier(value = "executeIngestionJob")
+    @Override
+    public void setJob(Job job) {
+        super.setJob(job);
     }
 }
