@@ -3,29 +3,35 @@ package br.com.bradesco.pfiningestion.jobs;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.bradesco.pfiningestion.BatchTestConfig;
+import br.com.bradesco.pfiningestion.FormatarDependente.steps.FormatarDependenteStepConfig;
+import br.com.bradesco.pfiningestion.FormatarDependente.writers.FormatarDependenteWriterConfig;
 
-@SpringBatchTest
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
     IngestionJobConfig.class,
     BatchTestConfig.class,
-    ExtractJobLauncherTestUtils.class
+    ExtractJobLauncherTestUtils.class,
+    FormatarDependenteStepConfig.class,
+    FormatarDependenteWriterConfig.class
 })
+@JdbcTest
+@EnableBatchProcessing
+@SpringBatchTest
 public class IngestionJobTest {
 
     @Autowired

@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
-import br.com.bradesco.pfiningestion.FormatarDependente.entities.FormatarDependente;
+import br.com.bradesco.pfiningestion.FormatarDependente.vos.AgteMercdDepdtPlanjFincrVO;
 
 @Configuration
-public class FormatarDependenteReaderConfig {
+public class AgteMercdDepdtPlanjFincrReaderConfig {
 
     private String getQuery() {
         StringBuilder builder = new StringBuilder();
@@ -23,13 +23,13 @@ public class FormatarDependenteReaderConfig {
         return builder.toString();
     }
     
-    @Bean("executeFormataDependenteReader")
-    public JdbcCursorItemReader<FormatarDependente> execute(@Qualifier("pfinDataSource") DataSource dataSource) {
-        return new JdbcCursorItemReaderBuilder<FormatarDependente>()
-            .name("executeFormataDependenteReader")
+    @Bean("executeAgteMercdDepdtPlanjFincrVOReader")
+    public JdbcCursorItemReader<AgteMercdDepdtPlanjFincrVO> execute(@Qualifier("pfinDataSource") DataSource dataSource) {
+        return new JdbcCursorItemReaderBuilder<AgteMercdDepdtPlanjFincrVO>()
+            .name("executeAgteMercdDepdtPlanjFincrVOReader")
             .dataSource(dataSource)
             .sql(getQuery())
-            .rowMapper(new BeanPropertyRowMapper<FormatarDependente>(FormatarDependente.class))
+            .rowMapper(new BeanPropertyRowMapper<AgteMercdDepdtPlanjFincrVO>(AgteMercdDepdtPlanjFincrVO.class))
             .build();
     }
 }

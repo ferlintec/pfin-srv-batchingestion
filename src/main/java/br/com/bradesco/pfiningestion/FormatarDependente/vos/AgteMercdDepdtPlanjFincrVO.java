@@ -1,9 +1,9 @@
-package br.com.bradesco.pfiningestion.FormatarDependente.entities;
+package br.com.bradesco.pfiningestion.FormatarDependente.vos;
 
 import lombok.Data;
 
 @Data
-public class FormatarDependente {
+public class AgteMercdDepdtPlanjFincrVO {
     private Integer nPssoaDepdtPlanjFincr;
     private Integer nAgteMercdPlanjFincr;
     private Integer cBco;

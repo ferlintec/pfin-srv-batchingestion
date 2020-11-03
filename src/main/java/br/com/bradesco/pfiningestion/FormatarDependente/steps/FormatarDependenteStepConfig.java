@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.bradesco.pfiningestion.FormatarDependente.entities.FormatarDependente;
+import br.com.bradesco.pfiningestion.FormatarDependente.vos.AgteMercdDepdtPlanjFincrVO;
 
 @Configuration
 public class FormatarDependenteStepConfig {
@@ -18,12 +18,12 @@ public class FormatarDependenteStepConfig {
 
     @Bean("formatarDependenteStep")
     public Step execute(
-        @Qualifier("executeFormataDependenteReader") ItemReader<FormatarDependente> reader,
-        @Qualifier("executeFormataDependenteWriter") ItemWriter<FormatarDependente> writer
+        @Qualifier("executeAgteMercdDepdtPlanjFincrVOReader") ItemReader<AgteMercdDepdtPlanjFincrVO> reader,
+        @Qualifier("executeAgteMercdDepdtPlanjFincrWriter") ItemWriter<AgteMercdDepdtPlanjFincrVO> writer
     ) {
         return factory
             .get("formatarDependenteStep")
-            .<FormatarDependente, FormatarDependente>chunk(1)
+            .<AgteMercdDepdtPlanjFincrVO, AgteMercdDepdtPlanjFincrVO>chunk(1)
             .reader(reader)
             .writer(writer)
             .build();
