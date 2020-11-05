@@ -12,17 +12,17 @@ import org.springframework.context.annotation.Configuration;
 import br.com.bradesco.pfiningestion.FormatarDependente.vos.AgteMercdDepdtPlanjFincrVO;
 
 @Configuration
-public class FormatarDependenteStepConfig {
+public class AgteMercdDepdtPlanjFincrStepConfig {
     @Autowired
     private StepBuilderFactory factory;
 
-    @Bean("formatarDependenteStep")
+    @Bean("agteMercdDepdtPlanjFincrStep")
     public Step execute(
-        @Qualifier("executeAgteMercdDepdtPlanjFincrVOReader") ItemReader<AgteMercdDepdtPlanjFincrVO> reader,
+        @Qualifier("executeAgteMercdDepdtPlanjFincrReader") ItemReader<AgteMercdDepdtPlanjFincrVO> reader,
         @Qualifier("executeAgteMercdDepdtPlanjFincrWriter") ItemWriter<AgteMercdDepdtPlanjFincrVO> writer
     ) {
         return factory
-            .get("formatarDependenteStep")
+            .get("agteMercdDepdtPlanjFincrStep")
             .<AgteMercdDepdtPlanjFincrVO, AgteMercdDepdtPlanjFincrVO>chunk(1)
             .reader(reader)
             .writer(writer)

@@ -18,16 +18,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.bradesco.pfiningestion.BatchTestConfig;
-import br.com.bradesco.pfiningestion.FormatarDependente.steps.FormatarDependenteStepConfig;
-import br.com.bradesco.pfiningestion.FormatarDependente.writers.FormatarDependenteWriterConfig;
+
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
     IngestionJobConfig.class,
     BatchTestConfig.class,
     ExtractJobLauncherTestUtils.class,
-    FormatarDependenteStepConfig.class,
-    FormatarDependenteWriterConfig.class
 })
 @JdbcTest
 @EnableBatchProcessing
