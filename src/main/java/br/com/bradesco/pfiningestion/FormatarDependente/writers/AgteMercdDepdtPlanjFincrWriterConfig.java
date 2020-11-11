@@ -12,7 +12,7 @@ import org.springframework.core.io.Resource;
 import br.com.bradesco.pfiningestion.FormatarDependente.vos.AgteMercdDepdtPlanjFincrVO;
 
 @Configuration
-public class FormatarDependenteWriterConfig {
+public class AgteMercdDepdtPlanjFincrWriterConfig {
     
     @StepScope
     @Bean("executeAgteMercdDepdtPlanjFincrWriter")
@@ -20,7 +20,7 @@ public class FormatarDependenteWriterConfig {
         @Value("#{jobParameters['fileAgteMercdDepdtPlanjFincr']}") Resource resource
     ) {
         return new FlatFileItemWriterBuilder<AgteMercdDepdtPlanjFincrVO>()
-            .name("fileAgteMercdDepdtPlanjFincrVO")
+            .name("executeAgteMercdDepdtPlanjFincrWriter")
             .resource(resource)
             .delimited()
             .delimiter(";")

@@ -23,10 +23,10 @@ public class AgteMercdDepdtPlanjFincrReaderConfig {
         return builder.toString();
     }
     
-    @Bean("executeAgteMercdDepdtPlanjFincrVOReader")
+    @Bean("executeAgteMercdDepdtPlanjFincrReader")
     public JdbcCursorItemReader<AgteMercdDepdtPlanjFincrVO> execute(@Qualifier("pfinDataSource") DataSource dataSource) {
         return new JdbcCursorItemReaderBuilder<AgteMercdDepdtPlanjFincrVO>()
-            .name("executeAgteMercdDepdtPlanjFincrVOReader")
+            .name("executeAgteMercdDepdtPlanjFincrReader")
             .dataSource(dataSource)
             .sql(getQuery())
             .rowMapper(new BeanPropertyRowMapper<AgteMercdDepdtPlanjFincrVO>(AgteMercdDepdtPlanjFincrVO.class))
