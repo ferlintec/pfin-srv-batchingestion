@@ -1,10 +1,10 @@
-IF OBJECT_ID('AgenteMercadoDadosAgente', 'IF') IS NOT NULL
+IF OBJECT_ID('getAgenteMercadoDadosAgente', 'IF') IS NOT NULL
 BEGIN
-    DROP FUNCTION [dbo].[AgenteMercadoDadosAgente]
+    DROP FUNCTION [dbo].[getAgenteMercadoDadosAgente]
 END
 GO
 
-CREATE FUNCTION [dbo].[AgenteMercadoDadosAgente]()
+CREATE FUNCTION [dbo].[getAgenteMercadoDadosAgente]()
 RETURNS TABLE
 AS
 RETURN
@@ -19,8 +19,10 @@ RETURN
     FROM [dbo].[tAgteMercdDepdtPlanjFincr] AS agteMercdDepdtPlanjFincr
     INNER JOIN [dbo].[tAgteMercdPlanjFincr] AS agteMercdPlanjFincr
         ON agteMercdDepdtPlanjFincr.nAgteMercdPlanjFincr = agteMercdPlanjFincr.nAgteMercdPlanjFincr
+    ORDER BY agteMercdDepdtPlanjFincr.nPssoaDepdtPlanjFincr;
+GO
 
-
+--Precisa fazer o cursor e juntar com a function acima
 SELECT 
     [nPssoaDepdtPlanjFincr] as tPssoaDepdtPlanjFincr_nPssoaDepdtPlanjFincr,
     [nPssoaPlanjFincr] as tPssoaDepdtPlanjFincr_nPssoaPlanjFincr,
@@ -36,10 +38,11 @@ SELECT
     [cUsuarIncl] as tPssoaDepdtPlanjFincr_cUsuarIncl,
     [hInclReg] as tPssoaDepdtPlanjFincr_hInclReg,
     [hUltAltReg] as tPssoaDepdtPlanjFincr_hUltAltReg
-FROM [dbo].[tPssoaDepdtPlanjFincr] as tPssoaDepdtPlanjFincr;
+FROM [dbo].[tPssoaDepdtPlanjFincr] as tPssoaDepdtPlanjFincr
+ORDER BY tPssoaDepdtPlanjFincr.nPssoaDepdtPlanjFincr;
 
 
-select * from AgenteMercadoDadosAgente();
+select * from getAgenteMercadoDadosAgente() agtMerDAgt;
 
 
 
