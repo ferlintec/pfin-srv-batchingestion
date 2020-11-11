@@ -19,7 +19,7 @@ RETURN
     FROM [PFIND000].[dbo].[tAssntPlanjFincr] as tAssntPlanjFincr
     INNER JOIN [PFIND000].[dbo].[tMomenVidaPlanjFincr] as tMomenVidaPlanjFincr
         ON tMomenVidaPlanjFincr.nMomenVidaPlanjFincr = tAssntPlanjFincr.nMomenVidaPlanjFincr
-    ORDER BY tAssntPlanjFincr_nAssntPlanjFincr;
+    ORDER BY [tAssntPlanjFincr].[nAssntPlanjFincr];
 GO
 
 
