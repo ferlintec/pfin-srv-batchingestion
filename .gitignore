@@ -25,3 +25,9 @@ hs_err_pid*
 .factorypath/
 
 target/
+.vscode/settings.json
+target/classes/META-INF/spring-configuration-metadata.json
+.project
+.settings/org.springframework.ide.eclipse.prefs
+.vscode/settings.json
+.project

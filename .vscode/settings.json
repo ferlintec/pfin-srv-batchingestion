@@ -1,3 +1,28 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "tabnine.experimentalAutoImports": true,
+    "java.home": "C:\\Program Files\\Java\\jdk-11.0.9",
+    "java.configuration.runtimes": [
+        {
+            "default": true,
+            "name": "JavaSE-1.8",
+            "path": "C:\\Program Files\\Java\\jdk1.8.0_251",
+        }
+    ],
+    "[java]": {
+        "editor.suggest.snippetsPreventQuickSuggestions": false
+    },
+    "jdk.home": "C:\\Program Files\\Java\\jdk1.8.0_251",
+    "concourse.ls.java.home": "C:\\Program Files\\Java\\jdk1.8.0_251",
+    "spring-boot.ls.java.home": "C:\\Program Files\\Java\\jdk1.8.0_251",
+    "maven.terminal.useJavaHome": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "java.project.importOnFirstTimeStartup": "automatic",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "java.help.firstView": "gettingStarted"
 }
